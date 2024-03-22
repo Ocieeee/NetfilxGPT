@@ -6,6 +6,7 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVTAR } from '../utils/constants';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://cdn.bleacherreport.net/images_root/slides/photos/000/652/474/108008952_original.jpg?1295611338",
+            photoURL: {USER_AVTAR}
           })  
             .then(()=>{
               const {uid , email ,displayName,photoURL} = auth.currentUser;
@@ -62,7 +63,7 @@ const Login = () => {
         )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          
           navigate("/browse")
         })
         .catch((error) => {
